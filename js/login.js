@@ -49,18 +49,19 @@ requirejs(["jquery","do_cookie", "cookie", "delete_cookie", "set_cookie_amount",
 	$(".account_btn").click(function(){
 		if(flag1){
 			$.ajax({
-				type:"get",
-				url:"http://localhost/sfbest/api/login.php",
+				type:"post",
+				url:"http://console.fangmingwei.com:3000/user/login",
 				async:true,
 				data:{
-					uname:$(".account_num_input input").val(),
+					phone:$(".account_num_input input").val(),
 					password:$(".account_password_input input").val()
 				},
 				dataType:"json",
 				success:function(data){
 					console.log(data)
-					if(data.errorCode == 0 && $(".account_num_input input").val()!=""  &&  $(".account_password_input input").val()!=""   ){
+					if(data.code == 1){
 						setCookie("login",$(".account_num_input input").val());
+						alert("登录成功")
 						window.location.href='index.html';
 					}else{
 						alert("请填写正确的账号密码");
